@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Select language: (1) Kazakh, (2) Russian, (3) English");
+        int languageChoice = scanner.nextInt();
+
+        CurrencyExchangeService exchangeService;
+        String fromCurrency, toCurrency;
+
+        switch (languageChoice) {
+            case 1:
+                exchangeService = new KazakhCurrencyExchangeService();
+                fromCurrency = "KZT";
+                break;
+            case 2:
+                exchangeService = new RussianCurrencyExchangeService();
+                fromCurrency = "RUB";
+                break;
+            case 3:
+                exchangeService = new EnglishCurrencyExchangeService();
+                fromCurrency = "USD";
+                break;
+            default:
+                System.out.println("Invalid language choice.");
+                return;
+        }
+
+        System.out.print("Enter the amount: ");
+        double amount = scanner.nextDouble();
+
+        System.out.print("Select the target currency: (1) Dollars, (2) Rubles, (3) Tenge: ");
+        int currencyChoice = scanner.nextInt();
+
+        switch (currencyChoice) {
+            case 1:
+                toCurrency = "USD";
+                break;
+            case 2:
+                toCurrency = "RUB";
+                break;
+            case 3:
+                toCurrency = "KZT";
+                break;
+            default:
+                System.out.println("Invalid currency choice.");
+                return;
+        }
+
+        double exchangedAmount = exchangeService.exchange(amount, fromCurrency, toCurrency);
+        System.out.println("Money exchanged: " + exchangedAmount);
+
+        scanner.close();
+    }
+}
