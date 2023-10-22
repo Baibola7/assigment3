@@ -1,0 +1,74 @@
+import java.util.HashMap;
+import java.util.Map;
+
+// Interface for the CurrencyExchangeService
+interface CurrencyExchangeService {
+    double exchange(double amount, String fromCurrency, String toCurrency);
+}
+
+// Kazakh Currency Exchange Service
+class KazakhCurrencyExchangeService implements CurrencyExchangeService {
+    private Map<String, Double> exchangeRates;
+
+    KazakhCurrencyExchangeService() {
+        exchangeRates = new HashMap<>();
+        exchangeRates.put("USD", 0.0021);
+        exchangeRates.put("RUB", 0.20);
+        // Add more exchange rates as needed
+    }
+
+    @Override
+    public double exchange(double amount, String fromCurrency, String toCurrency) {
+        if (exchangeRates.containsKey(fromCurrency) && exchangeRates.containsKey(toCurrency)) {
+            double fromRate = exchangeRates.get(fromCurrency);
+            double toRate = exchangeRates.get(toCurrency);
+            return amount * (toRate / fromRate);
+        }
+        return 0.0; // Handle unsupported conversions
+    }
+}
+
+// Russian Currency Exchange Service
+class RussianCurrencyExchangeService implements CurrencyExchangeService {
+    private Map<String, Double> exchangeRates;
+
+    RussianCurrencyExchangeService() {
+        exchangeRates = new HashMap<>();
+        exchangeRates.put("USD", 0.010);
+        exchangeRates.put("KZT", 5.01);
+        // Add more exchange rates as needed
+    }
+
+    @Override
+    public double exchange(double amount, String fromCurrency, String toCurrency) {
+        if (exchangeRates.containsKey(fromCurrency) && exchangeRates.containsKey(toCurrency)) {
+            double fromRate = exchangeRates.get(fromCurrency);
+            double toRate = exchangeRates.get(toCurrency);
+            return amount * (toRate / fromRate);
+        }
+        return 0.0; // Handle unsupported conversions
+    }
+}
+
+// English Currency Exchange Service
+class EnglishCurrencyExchangeService implements CurrencyExchangeService {
+    private Map<String, Double> exchangeRates;
+
+    EnglishCurrencyExchangeService() {
+        exchangeRates = new HashMap<>();
+        exchangeRates.put("RUB", 91.31);
+        exchangeRates.put("KZT", 479.06);
+        // Add more exchange rates as needed
+    }
+
+    @Override
+    public double exchange(double amount, String fromCurrency, String toCurrency) {
+        if (exchangeRates.containsKey(fromCurrency) && exchangeRates.containsKey(toCurrency)) {
+            double fromRate = exchangeRates.get(fromCurrency);
+            double toRate = exchangeRates.get(toCurrency);
+            return amount * (toRate / fromRate);
+        }
+        return exchangeRates.size(); // Handle unsupported conversions
+    }
+}
+
