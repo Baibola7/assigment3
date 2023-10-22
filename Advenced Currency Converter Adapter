@@ -1,0 +1,14 @@
+public class AdvancedCurrencyConverterAdapter implements CurrencyConverter {
+    private AdvancedCurrencyConverter advancedConverter;
+
+    public AdvancedCurrencyConverterAdapter(AdvancedCurrencyConverter advancedConverter) {
+        this.advancedConverter = advancedConverter;
+    }
+
+    @Override
+    public double convert(double amount, String fromCurrency, String toCurrency) {
+        // Use the methods of the AdvancedCurrencyConverter to perform the conversion
+        double rate = advancedConverter.getExchangeRate(fromCurrency, toCurrency);
+        return amount * rate;
+    }
+}
